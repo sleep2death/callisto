@@ -3,8 +3,9 @@ package callisto
 import "testing"
 
 func TestHello(t *testing.T) {
-	res := Hello()
-	if res != "Hello" {
-		t.Error("result should be \"Hello\".")
+	res := Hello("Aspirin")
+
+	if res != "Hello, Aspirin" {
+		t.Errorf("Should be \"Hello, Aspirin\", but got: %s", res)
 	}
 }

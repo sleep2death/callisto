@@ -1,9 +1,9 @@
 package callisto
 
-import "fmt"
+import "strings"
 
 // Hello is a test function
-func Hello() string {
-	fmt.Println("Hello")
-	return "Hello"
+func Hello(name string) string {
+	arr := []string{"Hello", name}
+	return strings.Join(arr, ", ")
 }
