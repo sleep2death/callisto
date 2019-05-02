@@ -1,9 +1,12 @@
 package callisto
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+	"os"
 	"time"
+
+	"github.com/gin-contrib/static"
+	"github.com/gin-gonic/gin"
 )
 
 // Server is a gin server wrapper
@@ -17,10 +20,10 @@ func Serve() error {
 		router: gin.Default(),
 	}
 
+	s.router.Use(static.Serve("/", static.LocalFile(os.Getenv("SITE"), true)))
 	s.router.Handle("GET", "/hello", helloHandler())
-	s.router.Run(":3000")
 
-	return nil
+	return s.router.Run()
 }
 
 func helloHandler() gin.HandlerFunc {
