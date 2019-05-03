@@ -2,10 +2,9 @@ package callisto
 
 import (
 	"net/http"
-	"os"
 	"time"
 
-	"github.com/gin-contrib/static"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,10 +19,11 @@ func Serve() error {
 		router: gin.Default(),
 	}
 
-	s.router.Use(static.Serve("/", static.LocalFile(os.Getenv("SITE"), true)))
+	// s.router.Use(static.Serve("/", static.LocalFile(os.Getenv("SITE"), true)))
+	s.router.Use(cors.Default())
 	s.router.Handle("GET", "/hello", helloHandler())
 
-	return s.router.Run()
+	return s.router.Run(":3030")
 }
 
 func helloHandler() gin.HandlerFunc {
