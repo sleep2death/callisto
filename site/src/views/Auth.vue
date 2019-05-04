@@ -19,10 +19,12 @@ export default {
     HelloWorld
   },
   mounted: function () {
-    // var code = this.$route.query.code
-    axios.get('http://127.0.0.1:3030/hello')
+    var code = this.$route.query.code
+    console.log(code)
+    axios.get(this.$store.state.AUTH_URL, { params: { code } })
       .then((resp) => {
-        this.$store.dispatch('response', resp.data)
+        console.log(resp.data)
+        this.$store.dispatch('response', resp.data['login'])
       })
   }
 }
